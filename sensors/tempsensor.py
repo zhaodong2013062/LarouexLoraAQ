@@ -1,9 +1,10 @@
-import random
+import Adafruit_DHT
 
-class TempSensor():
+class TempHumSensor():
 
-    def __init__(self, set_value):
-        self.curr_value = set_value
+    def __init__(self, dht_model, dht_pin):
+        self.dht_model = dht_model
+        self.dht_pin = dht_pin
 
-    def getValue(self):
-        return self.curr_value + random.randint(-5, 5)
+    def get_values(self):
+        return Adafruit_DHT.read_retry(self.dht_model, self.dht_pin)
