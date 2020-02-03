@@ -10,4 +10,5 @@ pillow
 adafruit-circuitpython-dht
 adafruit-circuitpython-ads1x15
 adafruit_ads1x15
+rak811
 wiringpi

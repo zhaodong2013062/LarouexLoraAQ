@@ -1,2 +1,0 @@
-libgpiod2
-# enable spi and i2c
