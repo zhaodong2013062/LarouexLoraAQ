@@ -11,8 +11,8 @@ from kivy.clock import Clock
 from kivy.graphics import Color, Rectangle
 from ui.gauge import Gauge
 import constants
-from sensors.tempsensor import TempSensor
-from sensors.pmsensor import PMSensor
+from sensors.tempsensor import TempHumSensor
+# from sensors.pmsensor import PMSensor
 from kivy.clock import Clock
 from kivy.uix.screenmanager import ScreenManager, Screen
 
@@ -26,8 +26,8 @@ class MainScreen(Screen):
             self.rect = Rectangle(size=(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT),
                 pos=self.pos)
 
-        self.temp_hum_sensor = TempHumSensor(50)
-        self.pm_sensor = PMSensor(constants.PM_LED_PIN, constants.PM_ADC_CHANNEL)
+        self.temp_hum_sensor = TempHumSensor(constants.DHT_PIN)
+        # self.pm_sensor = PMSensor(constants.PM_LED_PIN, constants.PM_ADC_CHANNEL)
 
         self.temp_gauge = Gauge(size_gauge = 200, pos=(50,100))
         self.hum_gauge = Gauge(size_gauge = 200, pos=(300,100))
@@ -47,9 +47,8 @@ class MainScreen(Screen):
         Clock.schedule_interval(lambda *t: self.new_values(), 0.3)
 
     def new_values(self):
-        temp, hum = self.temp_hum_sensor.get_values()
-        self.temp_gauge = temp
-        self.hum_gauge = hum
+        self.temp_gauge = self.temp_hum_sensor.get_temp()
+        self.hum_gauge = self.temp_hum_sensor.get_hum()
         self.pm_gauge.value = self.pm_sensor.get_value()
 
 

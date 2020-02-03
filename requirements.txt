@@ -2,7 +2,12 @@ pip
 wheel
 setuptools 
 virtualenv
+kivy
 docutils 
 pygments
 Cython==0.29.10
 pillow
+adafruit-circuitpython-dht
+adafruit-circuitpython-ads1x15
+adafruit_ads1x15
+wiringpi

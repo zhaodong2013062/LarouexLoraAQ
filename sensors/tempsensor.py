@@ -1,10 +1,12 @@
-import Adafruit_DHT
+import adafruit_dht
 
 class TempHumSensor():
 
-    def __init__(self, dht_model, dht_pin):
-        self.dht_model = dht_model
-        self.dht_pin = dht_pin
+    def __init__(self, dht_pin):
+        self._dht_device = adafruit_dht.DHT22(dht_pin)
+    
+    def get_temp(self):
+        return self._dht_device.temperature
 
-    def get_values(self):
-        return Adafruit_DHT.read_retry(self.dht_model, self.dht_pin)
+    def get_hum(self):
+        return self._dht_device.humidity
